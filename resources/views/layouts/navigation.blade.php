@@ -48,6 +48,12 @@
                             <x-dropdown-link href="#">
                                 {{ __('Warung') }}
                             </x-dropdown-link>
+                            @role('superadmin|admin')
+                            <x-dropdown-link :href="route('users.index')" 
+                                            :active="request()->routeIs('users.*')">
+                                {{ __('Manajemen User') }}
+                            </x-dropdown-link>
+                            @endrole 
                         </div>
                     </div>
 
@@ -187,6 +193,12 @@
                     <x-responsive-nav-link href="#">{{ __('Produk') }}</x-responsive-nav-link>
                     <x-responsive-nav-link href="#">{{ __('Sales') }}</x-responsive-nav-link>
                     <x-responsive-nav-link href="#">{{ __('Warung') }}</x-responsive-nav-link>
+                    @role('superadmin|admin')
+                    <x-responsive-nav-link :href="route('users.index')"
+                                        :active="request()->routeIs('users.*')">
+                        {{ __('Manajemen User') }}
+                    </x-responsive-nav-link>
+                    @endrole
                 </div>
             </div>
 
