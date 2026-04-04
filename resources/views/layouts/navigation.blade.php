@@ -88,7 +88,7 @@
                             <x-dropdown-link href="#">
                                 {{ __('Reminder Restock') }}
                             </x-dropdown-link>
-                            <x-dropdown-link href="#">
+                            <x-dropdown-link :href="route('maps.index')">
                                 {{ __('Map View') }}
                             </x-dropdown-link>
                         </div>

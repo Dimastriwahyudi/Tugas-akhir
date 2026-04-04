@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserManagement\UserController;
+use App\Http\Controllers\Maps\WarungController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,5 +26,17 @@ Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
     Route::post('users/{user}/reset-password',  [UserController::class, 'resetPassword'])->name('users.reset-password');
     Route::get('activity-logs', [UserController::class, 'activityLog'])->name('activity.log');   
     });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('maps',                              [WarungController::class, 'index'])->name('maps.index');
+    Route::post('maps/warung',                      [WarungController::class, 'store'])->name('maps.store');
+    Route::put('maps/warung/{warung}',              [WarungController::class, 'update'])->name('maps.update');
+    Route::post('maps/warung/{warung}/kunjungan',   [WarungController::class, 'tambahKunjungan'])->name('maps.kunjungan');
+    Route::get('maps/warung/{warung}/riwayat',      [WarungController::class, 'riwayat'])->name('maps.riwayat');
+});
+
+Route::get('maps-test', function() {
+    return response()->json(['ok' => true]);
+})->middleware('auth');
 
 require __DIR__.'/auth.php';
